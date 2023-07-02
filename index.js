@@ -16,6 +16,7 @@
  */
 /* global Keyframes */
 
+
 $(function () {
     let webSocket = getWebSocket(),
             queryMap = getQueryMap(),
@@ -226,6 +227,7 @@ $(function () {
         audio.play().catch(function (err) {
             // User need to interact with the page.
             
+            
             if (err.toString().startsWith('NotAllowedError')) {
                 $('.main-alert').append($('<button/>', {
                     'html': 'Click me to activate audio hooks.',
@@ -365,7 +367,7 @@ $(function () {
                     audio;
 
             if (audioFile.length === 0) {
-                printDebug('Failed to find audio file.', true);
+                printDebug('Got TTS!', true);
                 audioFile = json.audio_panel_hook;
             }
 
@@ -897,5 +899,5 @@ $(function () {
     };
 
     // Handle processing the queue.
-    setInterval(handleQueue, 5e2);
+    setInterval(handleQueue, 5e3);
 });
