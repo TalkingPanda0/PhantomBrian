@@ -243,6 +243,7 @@ $(function () {
      * @function Handles the queue.
      */
     async function handleQueue() {
+	
        
         // Do not do anything if the queue is empty
         if (queueProcessing || queue.length === 0) {
@@ -392,6 +393,9 @@ $(function () {
             audio.play().catch(function (err) {
                 playingAudioFiles = playingAudioFiles.filter((elm) => elm !== audio);
                 console.log(err);
+		audio.currentTime = 0;
+                isPlaying = false;
+
             });
         } else {
             isPlaying = false;
