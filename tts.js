@@ -6,10 +6,13 @@ const voices = ["Filiz", "Astrid", "Tatyana", "Maxim", "Carmen", "Ines", "Cristi
 
 var readEveryMessage = 0;
 var freeCommand = 0;
+function replaceAll(string, search, replace) {
+  return string.split(search).join(replace);
+}
 function ttSay(Text)
 {
 	var text = encodeURIComponent(Text); 
-	text = text.replace("sweetb35","");
+	text = replaceAll(text,"sweetb35","");
 
 	if(text.charAt(0) !== '(')
 		voice = "Brian";
