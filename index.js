@@ -374,10 +374,7 @@ $(function () {
 
             // Create a new audio file.
             audio = new Audio(audioFile);
-		audio.load();
-
-
-	                // Set the volume.
+            // Set the volume.
             audio.volume = getOptionSetting('audioHookVolume', getOptionSetting('audio-hook-volume', '1'));
 
             if (json.hasOwnProperty("audio_panel_volume") && json.audio_panel_volume >= 0.0) {
@@ -385,41 +382,22 @@ $(function () {
             }
             // Add an event handler.
             $(audio).on('ended', function () {
-                printDebug('Audio finished, duration: ' + audio.duration,true);
+                printDebug('Audio finished, duration: ' + audio.duration);
                 playingAudioFiles = playingAudioFiles.filter((elm) => elm !== audio);
                 audio.currentTime = 0;
                 isPlaying = false;
             });
-	    var isReading = 0;
-            $(audio).on('durationchange', function () {
-		    if(isReading || !isFinite(audio.duration))
-			    return;
-		    isReading = 1;
-		   
-		printDebug("Got " + audio.duration + " seconds long message ",true);
-		if(audio.duration > 15.0)
-			{
-			printDebug("not reading it!",true);
-			audio.currentTime = 0; 
-			isPlaying = false;
-			return;
-
-			}
-
-		 printDebug('Playing audio',true);
-            	audio.play().catch(function (err) {
-                	playingAudioFiles = playingAudioFiles.filter((elm) => elm !== audio);
-                	console.log(err);
-			audio.currentTime = 0;
-                	isPlaying = false;
+            playingAudioFiles.push(audio);
+            // Play the audio.
+            printDebug('Playing audio');
+            audio.play().catch(function (err) {
+                playingAudioFiles = playingAudioFiles.filter((elm) => elm !== audio);
+                console.log(err);
+		audio.currentTime = 0;
+                isPlaying = false;
 
             });
-
-	    });
-
-
-            // Play the audio.
-                   } else {
+        } else {
             isPlaying = false;
         }
     }
