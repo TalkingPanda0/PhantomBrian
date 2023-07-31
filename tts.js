@@ -19,7 +19,7 @@ function ttSay(Text)
 	else
 	{
 		var voice = "";
-		for(var i =1;;i++)
+		for(var i =1;i<text.length;i++)
 		{
 			if(text.charAt(i) === ')')
 				break;
