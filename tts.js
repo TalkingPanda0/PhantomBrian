@@ -73,6 +73,10 @@ function ttSay(Text)
 				$.say("Enabled Free TTS command. type !tts before your message to have brian read it!");
 				freeCommand = 1;
 				return;
+			} else if (args[0].equalsIgnoreCase("skip"))
+			{
+				$.alertspollssocket.stopMedia();
+				return;
 			}
 	
 			ttSay(args.join(" "));
